@@ -10,7 +10,7 @@ const NewsLetter = () => {
   const [email, setEmail] = useState("");
 
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  const [validEmail, setValidEmail] = useState(true);
+  const [validEmail, setValidEmail] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
 
@@ -18,7 +18,7 @@ const NewsLetter = () => {
     const inputEmail = e.target.value;
     setEmail(inputEmail)
     // check if email is valid or empty
-    setValidEmail(emailRegex.test(inputEmail) || inputEmail === "")
+    setValidEmail(emailRegex.test(inputEmail) || email === "")
   }
 
   const handleSubmit = (e) => {
@@ -38,8 +38,13 @@ const NewsLetter = () => {
 
   }
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setEmail("")
+  }
 
-  return isModalOpen? <ThankYoucard /> :(
+  return isModalOpen ? (
+    <ThankYoucard name={email} onCloseModal={handleCloseModal} />) : (
     <>
       <Container1>
 
@@ -57,16 +62,21 @@ const NewsLetter = () => {
 
           <form className="my-form">
             <div className="contact">
-              <label for="email">
-                Email address
-                <input placeholder='email@company.com'
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={email}
-                  onChange={(handleEmailChange)}
-                />
-              </label>
+              <div className="email-label">
+                <label for="email">
+                  Email address
+                </label>
+                {!validEmail && email !== "" && (<p className="warning">Valid email required</p>)}
+              </div>
+
+              <input placeholder='email@company.com'
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={(handleEmailChange)}
+                  className={email !== "" && !validEmail ? "input-error": ""}
+              />
               <button
                 type="button"
                 onClick={handleSubmit}

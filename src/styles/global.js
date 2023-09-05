@@ -90,6 +90,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .contact label {
     font-size: 11px;
+    margin-top: 20px;
   }
 
   .contact {
@@ -98,7 +99,12 @@ export const GlobalStyle = createGlobalStyle`
 
   .contact input {
     width: 100%;
-    border: 1px solid var(--grey)
+
+  }
+  .input-error {
+    border: 1px solid var(--tomato);
+    color: var(--tomato);
+    background-color: rgba(255, 99, 71, 0.1);
   }
 
   .contact input,
@@ -146,6 +152,17 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 700;
   }
 
+  .email-label {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .email-label .warning {
+    color: var(--tomato);
+    font-size: 11px;
+    font-weight: bold;
+  }
+
 `;
 
 export const Container1 = styled.div`
@@ -173,3 +190,4 @@ export const Container2 = styled.div`
   transform: translate(-50%, -50%);
   display: flex;
 `;
+
