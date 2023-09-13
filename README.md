@@ -7,7 +7,7 @@ This is a solution to the [Newsletter sign-up form with success message challeng
 ![](./src/assets/images/Screenshot.png)
 
 ### Links
-- [Live site]()
+- [Live site](https://master--0xzaid-newsletter-form.netlify.app/)
 
 ### Built with
 - [React](https://reactjs.org/) - JS library
