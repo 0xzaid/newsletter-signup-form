@@ -10,7 +10,7 @@ const NewsLetter = () => {
 
   const [email, setEmail] = useState("");
 
-  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; //eslint-disable-line
   const [validEmail, setValidEmail] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
