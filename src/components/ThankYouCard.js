@@ -1,5 +1,5 @@
 import React from "react"
-import { Container2 } from '../styles/global';
+import { Container2, Button } from '../styles/global';
 import IconSuccessImg from '../assets/images/icon-success.svg';
 
 
@@ -7,7 +7,6 @@ const ThankYoucard = ({ onCloseModal, name }) => {
 
   const handleButtonClick = () => {
     onCloseModal();
-
   }
 
   return (
@@ -18,12 +17,11 @@ const ThankYoucard = ({ onCloseModal, name }) => {
         <p className="confirmation-text">A confimration email has been sent to to
           <span class="confirmation-email"> {name}</span>. Please open it and click the
           button inside to confirm your subscription</p>
-        <button
+        <Button
           type="button"
-          className="dismiss-btn"
           onClick={handleButtonClick}
         >
-          Dismiss message</button>
+          Dismiss message</Button>
       </div>
     </Container2>
   )

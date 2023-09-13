@@ -1,6 +1,7 @@
-import { Container1 } from '../styles/global';
-import SignUpImg from '../assets/images/illustration-sign-up-desktop.svg';
-import React, { useEffect, useState } from "react";
+import { Container1, Button } from '../styles/global';
+import SignUpImgDesktop from '../assets/images/illustration-sign-up-desktop.svg';
+import SignUpImgMobile from '../assets/images/illustration-sign-up-mobile.svg';
+import React, { useState } from "react";
 import icons from '../assets/images/icon-list.svg'
 import ThankYoucard from './ThankYouCard';
 
@@ -16,26 +17,25 @@ const NewsLetter = () => {
 
   const handleEmailChange = (e) => {
     const inputEmail = e.target.value;
-    setEmail(inputEmail)
-    // check if email is valid or empty
-    setValidEmail(emailRegex.test(inputEmail) || email === "")
+    setEmail(inputEmail);
+
+    if (inputEmail === "") {
+      // If the input is empty, consider it as invalid
+      setValidEmail(false);
+    } else {
+      // Check if email is valid
+      setValidEmail(emailRegex.test(inputEmail));
+    }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    /*
-    if valid email -> send to ty page
-    else -> error
-    */
     if (validEmail) {
-      console.log("Valid email, form submitted")
+      console.log(`Valid email: >${email}<, form submitted`)
       setIsModalOpen(true)
     } else {
       console.log("Invalid")
     }
-
-
   }
 
   const handleCloseModal = () => {
@@ -47,17 +47,19 @@ const NewsLetter = () => {
     <ThankYoucard name={email} onCloseModal={handleCloseModal} />) : (
     <>
       <Container1>
-
-
+        <div class="signup-img">
+          <img src={SignUpImgDesktop} alt="Signup" className="desktop-image" />
+          <img src={SignUpImgMobile} alt="Signup" className="mobile-image" />
+        </div>
         <div className="info-text">
           <h1>Stay updated!</h1>
 
           <p>Join 60,000+ product managers receiving monthly updates on:</p>
 
           <ul>
-            <li> <img src={icons} alt="" /> Product discovery and building what matters</li>
-            <li> <img src={icons} alt="" /> Measuring to ensure updates are a success</li>
-            <li> <img src={icons} alt="" /> Add much more!</li>
+            <li> <img src={icons} alt="" /> <div>Product discovery and building what matters</div></li>
+            <li> <img src={icons} alt="" /> <div>Measuring to ensure updates are a success</div></li>
+            <li> <img src={icons} alt="" /> <div>Add much more!</div></li>
           </ul>
 
           <form className="my-form">
@@ -66,7 +68,9 @@ const NewsLetter = () => {
                 <label for="email">
                   Email address
                 </label>
-                {!validEmail && email !== "" && (<p className="warning">Valid email required</p>)}
+                {!validEmail && email !== "" && (
+                  <p className="warning">Please enter a valid email</p>
+                )}
               </div>
 
               <input placeholder='email@company.com'
@@ -75,22 +79,15 @@ const NewsLetter = () => {
                 name="email"
                 value={email}
                 onChange={(handleEmailChange)}
-                  className={email !== "" && !validEmail ? "input-error": ""}
+                className={email !== "" && !validEmail ? "input-error" : ""}
               />
-              <button
+              <Button
                 type="button"
                 onClick={handleSubmit}
-              >Subscribe to monthly newsletter</button>
+              >Subscribe to monthly newsletter</Button>
             </div>
           </form>
         </div>
-
-        <div class="signup-img">
-          <img src={SignUpImg} alt="" />
-        </div>
-
-
-
       </Container1>
     </>
   );
